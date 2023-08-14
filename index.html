@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pumpkin Controller</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    table,
+    tr,
+    td,
+    th {
+      padding: 10px;
+      margin: auto;
+      border: none;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+</head>
+
+<body>
+  <main>
+    <h1>Pumpkin Controller</h1>
+    <p>Bresaola tri-tip rump drumstick kevin. Shankle porchetta alcatra frankfurter turkey. Meatball turducken t-bone
+      bresaola buffalo. T-bone capicola cow venison. Turducken hamburger tri-tip tenderloin, short loin kielbasa sausage
+      meatloaf pancetta. Andouille ground round fatback ribeye, pork belly meatball strip steak. Pork loin beef ribs
+      landjaeger buffalo.</p>
+
+    <details>
+      <summary>Configuration (do first)</summary>
+      <form id="ipForm">
+        <label for="ipaddr">Remote Device IP Address: </label>
+        <input type="text" id="ipaddr" required
+          pattern="^((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$">
+        <input type="submit" value="Submit">
+      </form>
+    </details>
+
+    <table>
+      <tr>
+        <td><button type="button">Random Colors</button></td>
+        <td>
+          Flash: <select id="select1">
+              <option value="option1">option1</option>
+              <option value="option2">option2</option>
+            </select>
+            <button type="button">Go</button>          
+        </td>
+        <td></td>
+      </tr>      
+    </table>
+
+
+
+
+    <article>
+      <aside>
+        <p>
+          <a href="https://www.flaticon.com/free-icons/pumpkin" title="pumpkin icons" target="_blank">Pumpkin icons
+            created by smalllikeart - Flaticon</a>
+        </p>
+      </aside>
+    </article>
+  </main>
+  <script>
+    document.getElementById("ipaddr").value = localStorage.getItem("ipAddress");
+    let ipForm = document.getElementById("ipForm");
+    ipForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      localStorage.setItem("ipAddress", document.getElementById("ipaddr").value);
+    });
+  </script>
+
+</body>
+
+</html>
