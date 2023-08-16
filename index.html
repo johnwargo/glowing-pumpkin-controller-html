@@ -22,72 +22,79 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
-  <style>
-    table,
-    tr,
-    td,
-    th {
-      padding: 10px;
-      margin: auto;
-      border: none;
-    }
-  </style>
   <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+  <link rel="stylesheet" href="sweetalert2.min.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
 
 <body>
   <main>
     <h1>Pumpkin Controller</h1>
-    <p>Bresaola tri-tip rump drumstick kevin. Shankle porchetta alcatra frankfurter turkey. Meatball turducken t-bone
-      bresaola buffalo. T-bone capicola cow venison. Turducken hamburger tri-tip tenderloin, short loin kielbasa sausage
-      meatloaf pancetta. Andouille ground round fatback ribeye, pork belly meatball strip steak. Pork loin beef ribs
-      landjaeger buffalo.</p>
+    <p>Use the buttons below to control the remote device LED Matrix.</p>
 
     <details>
-      <summary>Configuration (do first)</summary>
+      <summary>Configuration</summary>
       <form id="ipForm">
         <label for="ipaddr">Remote Device IP Address: </label>
-        <input type="text" id="ipaddr" required
+        <input type="text" id="ipAddress" required
           pattern="^((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$">
         <input type="submit" value="Submit">
       </form>
     </details>
 
-    <table>
-      <tr>
-        <td><button type="button">Random Colors</button></td>
-        <td>
-          Flash: <select id="select1">
-              <option value="option1">option1</option>
-              <option value="option2">option2</option>
-            </select>
-            <button type="button">Go</button>          
-        </td>
-        <td></td>
-      </tr>      
-    </table>
+    <span>
+      <button type="button" id="btnRandom" class="button">Random Colors</button>
+      <button type="button" id="btnLightning" class="button">Lightning</button>
+    </span>    
+    <br />
+    <span>
+      <button type="button" id="btnBlue" style="background-color: blue; width: 200px">Blue</button>
+      <button type="button" id="btnGreen" style="background-color: green; width: 200px">Green</button>
+    </span>
+    <br />
+    <span>
+      <button type="button" id="btnOrange" style="background-color: orange; color: black; width: 200px">Orange</button>
+      <button type="button" id="btnPurple" style="background-color: purple; width: 200px">Purple</button>
+    </span>
+    <br />
+    <span>
+      <button type="button" id="btnRed" style="background-color: red; width: 200px">Red</button>
+      <button type="button" id="btnYellow" style="background-color: yellow; color: black; width: 200px">Yellow</button>
+    </span>
+    
+    <form id="flashForm">
+      <h2>Flash</h2>
+      <select id="flashCount">
+        <option value="1">Once</option>
+        <option value="2">2 times</option>
+        <option value="2">3 times</option>
+        <option value="2">4 times</option>
+        <option value="2">5 times</option>
+      </select>
+      <select id="flashColor">
+        <option value="0">Blue</option>
+        <option value="1">Green</option>
+        <option value="2">Orange</option>
+        <option value="3">Purple</option>
+        <option value="4">Red</option>
+        <option value="5">Yellow</option>
+      </select>
+      <button type="button" id="btnFlash" class="button">Execute</button>
+    </form>
+    <footer>
+      <article>
+        <aside>
+          <p>
+            <a href="https://www.flaticon.com/free-icons/pumpkin" title="pumpkin icons" target="_blank">Pumpkin icons
+              created by smalllikeart - Flaticon</a>
+          </p>
+        </aside>
+      </article>
+    </footer>
 
-
-
-
-    <article>
-      <aside>
-        <p>
-          <a href="https://www.flaticon.com/free-icons/pumpkin" title="pumpkin icons" target="_blank">Pumpkin icons
-            created by smalllikeart - Flaticon</a>
-        </p>
-      </aside>
-    </article>
   </main>
-  <script>
-    document.getElementById("ipaddr").value = localStorage.getItem("ipAddress");
-    let ipForm = document.getElementById("ipForm");
-    ipForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      localStorage.setItem("ipAddress", document.getElementById("ipaddr").value);
-    });
-  </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/index.js"></script>
 </body>
 
 </html>
