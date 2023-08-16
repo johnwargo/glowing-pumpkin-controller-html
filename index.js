@@ -18,7 +18,6 @@ document.getElementById('btnRandom').addEventListener('click', function (e) {
 document.getElementById('btnLightning').addEventListener('click', function (e) {
   // Send Lightning command to remote device
   console.log('Click: ' + e.target.id);
-
 });
 
 document.getElementById('btnFlash').addEventListener('click', function (e) {
