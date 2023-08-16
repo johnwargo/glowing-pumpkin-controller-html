@@ -52,4 +52,6 @@ function setColor(e, color) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "http://" + + "/setColor?color=" + color, true);
   xhr.send();
+  // TODO: display a toast on success
+  // TODO: show an error dialog on, you know, error
 }
