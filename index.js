@@ -12,16 +12,16 @@ ipForm.addEventListener("submit", (e) => {
 
 document.getElementById('btnRandom').addEventListener('click', function (e) {
   // Send Random command to remote device
-  console.log('Click: ' + e.target.id);
+  console.log(`Click: ${e.target.id}`);
 });
 
 document.getElementById('btnLightning').addEventListener('click', function (e) {
   // Send Lightning command to remote device
-  console.log('Click: ' + e.target.id);
+  console.log(`Click: ${e.target.id}`);
 });
 
 document.getElementById('btnFlash').addEventListener('click', function (e) {
-  console.log('Click: ' + e.target.id);
+  console.log(`Click: ${e.target.id}`);
 });
 
 // colors[] = { CRGB::Blue, CRGB::Green, CRGB::Orange, CRGB::Purple, CRGB::Red, CRGB::Yellow };
@@ -33,8 +33,7 @@ document.getElementById('btnRed').addEventListener('click', e => setColor(e, 4))
 document.getElementById('btnYellow').addEventListener('click', e => setColor(e, 5));
 
 function setColor(e, color) {
-  console.log('Click: ' + e.target.id);
-  console.log('Color: ' + color);
+  console.log(`Click: ${e.target.id}, Color: ${color}`);
 
   var ipAddress = localStorage.getItem(ipAddressKey);
   console.log('IP Address: ' + ipAddress);
