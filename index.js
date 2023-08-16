@@ -6,7 +6,7 @@ let ipForm = document.getElementById("ipForm");
 ipForm.addEventListener("submit", (e) => {
   e.preventDefault();
   var ipAddress = document.getElementById(ipAddressKey).value.trim();
-  console.log(`Saving IP address: ${ipAddress}`);
+  console.log(`Storing IP address: ${ipAddress}`);
   localStorage.setItem(ipAddressKey, ipAddress);
 });
 
