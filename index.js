@@ -36,8 +36,9 @@ function setColor(e, color) {
   console.log(`Click: ${e.target.id}, Color: ${color}`);
 
   var ipAddress = localStorage.getItem(ipAddressKey);
-  console.log('IP Address: ' + ipAddress);
+  // console.log('IP Address: ' + ipAddress);
   if (ipAddress == null || ipAddress == "") {
+    console.error('Missing IP Address');
     Swal.fire({
       title: 'Missing IP Address',
       text: 'Please enter the IP Address of your device in the configuration section before clicking buttons.',
