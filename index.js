@@ -10,17 +10,24 @@ ipForm.addEventListener("submit", (e) => {
   localStorage.setItem(ipAddressKey, ipAddress);
 });
 
-document.getElementById('btnRandom').addEventListener('click', function (e) {
-  // Send Random command to remote device
-  console.log(`Click: ${e.target.id}`);
-});
 
 document.getElementById('btnLightning').addEventListener('click', function (e) {
-  // Send Lightning command to remote device
+  // Send the `lightning` command to remote device
   console.log(`Click: ${e.target.id}`);
 });
 
 document.getElementById('btnFlash').addEventListener('click', function (e) {
+  // Send the `flash` command to remote device
+  console.log(`Click: ${e.target.id}`);
+});
+
+document.getElementById('btnOff').addEventListener('click', function (e) {
+  // Send the `off` command to remote device
+  console.log(`Click: ${e.target.id}`);
+});
+
+document.getElementById('btnRandom').addEventListener('click', function (e) {
+  // Send the `random` command to remote device
   console.log(`Click: ${e.target.id}`);
 });
 
@@ -36,7 +43,6 @@ async function setColor(e, color) {
   console.log(`Click: ${e.target.id}, Color: ${color}`);
 
   var ipAddress = localStorage.getItem(ipAddressKey);
-  // console.log('IP Address: ' + ipAddress);
   if (ipAddress == null || ipAddress == "") {
     console.error('Missing IP Address');
     Swal.fire({
@@ -52,23 +58,30 @@ async function setColor(e, color) {
     mode: "no-cors",
     headers: { 'Access-Control-Allow-Origin': '*' }
   }
-  await fetch(`http://${ipAddress}/color:${color}`, options)
-    .then(response => response.json()
-      .then(data => {
-        console.log(data);
-        if (response.status == 200) {
-          Swal.fire({
-            title: 'Success', text: 'Successfully changed color', toast: true, position: 'top-right', icon: 'success'
-          });
-        } else {
-          Swal.fire({
-            title: 'Fetch Error', text: response.message, icon: 'error', confirmButtonText: 'Continue'
-          });
-        }
-      }))
-    .catch(error =>
+
+  const response = await fetch(`http://${ipAddress}/color:${color}`, options)
+    .catch(error => {
       Swal.fire({
         title: 'Fetch Error', text: error.message, icon: 'error', confirmButtonText: 'Continue'
-      }));
+      });
+      return;
+    });
+
+  console.dir(response);
+  let data = await response.json();
+  console.dir(data);
+
+  // .then(data => {
+  //   console.dir(data);
+  // if (response.status == 200) {
+  //   Swal.fire({
+  //     title: 'Success', text: 'Successfully changed color', toast: true, position: 'top-right', icon: 'success'
+  //   });
+  // } else {
+  //   Swal.fire({
+  //     title: 'Fetch Error', text: response.message, icon: 'error', confirmButtonText: 'Continue'
+  //   });
+  // }
+  // });
 
 }
