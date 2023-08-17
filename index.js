@@ -1,4 +1,7 @@
+const continueStr = 'Continue';
 const ipAddressKey = "ipAddress";
+const errorIcon = 'error';
+const successIcon = 'success';
 
 document.getElementById(ipAddressKey).value = localStorage.getItem(ipAddressKey);
 
@@ -58,8 +61,8 @@ async function execCmd(cmdStr) {
     Swal.fire({
       title: 'Missing IP Address',
       text: 'Please enter the IP Address of your device in the configuration section before clicking buttons.',
-      icon: 'error',
-      confirmButtonText: 'OK'
+      icon: errorIcon,
+      confirmButtonText: continueStr
     });
     return;
   }
@@ -81,14 +84,31 @@ async function execCmd(cmdStr) {
     if (error instanceof SyntaxError) {
       // Unexpected token < in JSON
       console.log('There was a SyntaxError', error);
+      Swal.fire({
+        title: 'Syntax Error',
+        text: 'Perhaps an unexpected token in JSON response',
+        icon: errorIcon,
+        confirmButtonText: continueStr
+      });
     } else {
       console.log('There was an error', error);
+      Swal.fire({
+        text: error.message,
+        icon: errorIcon,
+        confirmButtonText: continueStr
+      });
     }
     return;
   }
 
   if (json) {
     console.log('Use the JSON here!', json);
+    Swal.fire({
+      text: 'Successfully changed color',
+      toast: true,
+      position: 'top-right',
+      icon: successIcon
+    });
   }
 
   // let response;
