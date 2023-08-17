@@ -3,6 +3,12 @@ const ipAddressKey = "ipAddress";
 const errorIcon = 'error';
 const successIcon = 'success';
 
+const headers = new Headers();
+// headers.append('Accept', 'application/json');
+headers.append('Accept', '*/*');
+headers.append('Access-Control-Allow-Origin', '*');
+const fetchOptions = { mode: "no-cors", headers };
+
 document.getElementById(ipAddressKey).value = localStorage.getItem(ipAddressKey);
 
 let ipForm = document.getElementById("ipForm");
@@ -70,92 +76,32 @@ async function execCmd(cmdStr) {
   let theURL = `http://${ipAddress}/${cmdStr}`;
   console.log(`Executing: ${theURL}`);
 
-  const options = {
-    mode: "no-cors",
-    headers: { 'Access-Control-Allow-Origin': '*' }
-  }
-
-
-  let json;
   try {
-    const response = await fetch(theURL, options);
-    json = await response.json();
-  } catch (error) {
-    if (error instanceof SyntaxError) {
-      // Unexpected token < in JSON
-      console.log('There was a SyntaxError', error);
-      Swal.fire({
-        title: 'Syntax Error',
-        text: 'Perhaps an unexpected token in JSON response',
-        icon: errorIcon,
-        confirmButtonText: continueStr
+    const response = await fetch(theURL, fetchOptions);
+    console.dir(response);
+    if (response.ok) {
+      response.json().then(json => {
+        console.dir(json);
+        Swal.fire({
+          text: 'Successfully changed color',
+          toast: true,
+          position: 'top-right',
+          icon: successIcon
+        });
       });
     } else {
+      console.log(`HTTP error: ${response.status}`);
+      Swal.fire({ text: `HTTP error: ${response.status}`, icon: errorIcon, confirmButtonText: continueStr }); 
+    }
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      console.log(error);
+      Swal.fire({ text: error, icon: errorIcon, confirmButtonText: continueStr });
+    } else {
       console.log('There was an error', error);
-      Swal.fire({
-        text: error.message,
-        icon: errorIcon,
-        confirmButtonText: continueStr
-      });
+      Swal.fire({ text: error.message, icon: errorIcon, confirmButtonText: continueStr });
     }
     return;
   }
 
-  if (json) {
-    console.log('Use the JSON here!', json);
-    Swal.fire({
-      text: 'Successfully changed color',
-      toast: true,
-      position: 'top-right',
-      icon: successIcon
-    });
-  }
-
-  // let response;
-  // try {
-  //   response = await fetch(theURL, options);
-  // } catch (error) {
-  //   console.log('There was an error: \n', error);
-  // }
-  // if (response?.ok) {
-  //   console.log('Use the response here!');
-  // } else {
-  //   console.log(`HTTP Response Code: ${response?.status}`)
-  // }
-
-
-  // fetch(theURL, options)
-  //   .then(response => {
-  //     console.log('then');
-  //     console.dir(response);
-  //     response.json().then(data => {
-  //       console.dir(data);
-  //     });
-  //     if (response.status == 200) {
-  //       Swal.fire({
-  //         // title: 'Success',
-  //         text: 'Successfully changed color',
-  //         toast: true,
-  //         position: 'top-right',
-  //         icon: 'success'
-  //       });
-  //     } else {
-  //       Swal.fire({
-  //         // title: 'Fetch Error',
-  //         text: response.message,
-  //         icon: 'error',
-  //         confirmButtonText: 'Continue'
-  //       });
-  //     }
-  //   })
-  //   .catch(err => {
-  //     console.log('catch');
-  //     console.error(err);
-  //     Swal.fire({
-  //       // title: 'Fetch Error',
-  //       text: err.message,
-  //       icon: 'error',
-  //       confirmButtonText: 'Continue'
-  //     });
-  //   });
 }
