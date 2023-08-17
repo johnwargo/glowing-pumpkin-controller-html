@@ -14,21 +14,27 @@ ipForm.addEventListener("submit", (e) => {
 document.getElementById('btnLightning').addEventListener('click', function (e) {
   // Send the `lightning` command to remote device
   console.log(`Click: ${e.target.id}`);
+  execCmd(`lightning:${document.getElementById('lightningCount').value}`);
 });
 
 document.getElementById('btnFlash').addEventListener('click', function (e) {
   // Send the `flash` command to remote device
   console.log(`Click: ${e.target.id}`);
+  let color = document.getElementById('flashColor').value;
+  let count = document.getElementById('flashCount').value;
+  execCmd(`color:${color}:${count}`);
 });
 
 document.getElementById('btnOff').addEventListener('click', function (e) {
   // Send the `off` command to remote device
   console.log(`Click: ${e.target.id}`);
+  execCmd('off');
 });
 
 document.getElementById('btnRandom').addEventListener('click', function (e) {
   // Send the `random` command to remote device
   console.log(`Click: ${e.target.id}`);
+  execCmd(`random`);
 });
 
 // colors[] = { CRGB::Blue, CRGB::Green, CRGB::Orange, CRGB::Purple, CRGB::Red, CRGB::Yellow };
@@ -39,8 +45,12 @@ document.getElementById('btnPurple').addEventListener('click', e => setColor(e, 
 document.getElementById('btnRed').addEventListener('click', e => setColor(e, 4));
 document.getElementById('btnYellow').addEventListener('click', e => setColor(e, 5));
 
-async function setColor(e, color) {
-  console.log(`Click: ${e.target.id}, Color: ${color}`);
+function setColor(e, colorIdx) {
+  console.log(`Click: ${e.target.id}, Color: ${colorIdx}`);
+  execCmd(`color:${colorIdx}`);
+}
+
+async function execCmd(cmdStr) {
 
   var ipAddress = localStorage.getItem(ipAddressKey);
   if (ipAddress == null || ipAddress == "") {
@@ -54,34 +64,78 @@ async function setColor(e, color) {
     return;
   }
 
+  let theURL = `http://${ipAddress}/${cmdStr}`;
+  console.log(`Executing: ${theURL}`);
+
   const options = {
     mode: "no-cors",
     headers: { 'Access-Control-Allow-Origin': '*' }
   }
 
-  const response = await fetch(`http://${ipAddress}/color:${color}`, options)
-    .catch(error => {
-      Swal.fire({
-        title: 'Fetch Error', text: error.message, icon: 'error', confirmButtonText: 'Continue'
-      });
-      return;
-    });
 
-  console.dir(response);
-  let data = await response.json();
-  console.dir(data);
+  let json;
+  try {
+    const response = await fetch(theURL, options);
+    json = await response.json();
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      // Unexpected token < in JSON
+      console.log('There was a SyntaxError', error);
+    } else {
+      console.log('There was an error', error);
+    }
+    return;
+  }
 
-  // .then(data => {
-  //   console.dir(data);
-  // if (response.status == 200) {
-  //   Swal.fire({
-  //     title: 'Success', text: 'Successfully changed color', toast: true, position: 'top-right', icon: 'success'
-  //   });
-  // } else {
-  //   Swal.fire({
-  //     title: 'Fetch Error', text: response.message, icon: 'error', confirmButtonText: 'Continue'
-  //   });
+  if (json) {
+    console.log('Use the JSON here!', json);
+  }
+
+  // let response;
+  // try {
+  //   response = await fetch(theURL, options);
+  // } catch (error) {
+  //   console.log('There was an error: \n', error);
   // }
-  // });
+  // if (response?.ok) {
+  //   console.log('Use the response here!');
+  // } else {
+  //   console.log(`HTTP Response Code: ${response?.status}`)
+  // }
 
+
+  // fetch(theURL, options)
+  //   .then(response => {
+  //     console.log('then');
+  //     console.dir(response);
+  //     response.json().then(data => {
+  //       console.dir(data);
+  //     });
+  //     if (response.status == 200) {
+  //       Swal.fire({
+  //         // title: 'Success',
+  //         text: 'Successfully changed color',
+  //         toast: true,
+  //         position: 'top-right',
+  //         icon: 'success'
+  //       });
+  //     } else {
+  //       Swal.fire({
+  //         // title: 'Fetch Error',
+  //         text: response.message,
+  //         icon: 'error',
+  //         confirmButtonText: 'Continue'
+  //       });
+  //     }
+  //   })
+  //   .catch(err => {
+  //     console.log('catch');
+  //     console.error(err);
+  //     Swal.fire({
+  //       // title: 'Fetch Error',
+  //       text: err.message,
+  //       icon: 'error',
+  //       confirmButtonText: 'Continue'
+  //     });
+  //   });
 }
