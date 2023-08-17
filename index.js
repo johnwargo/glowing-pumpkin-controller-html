@@ -32,7 +32,7 @@ document.getElementById('btnPurple').addEventListener('click', e => setColor(e, 
 document.getElementById('btnRed').addEventListener('click', e => setColor(e, 4));
 document.getElementById('btnYellow').addEventListener('click', e => setColor(e, 5));
 
-function setColor(e, color) {
+async function setColor(e, color) {
   console.log(`Click: ${e.target.id}, Color: ${color}`);
 
   var ipAddress = localStorage.getItem(ipAddressKey);
@@ -48,9 +48,27 @@ function setColor(e, color) {
     return;
   }
 
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://" + + "/setColor?color=" + color, true);
-  xhr.send();
-  // TODO: display a toast on success
-  // TODO: show an error dialog on, you know, error
+  const options = {
+    mode: "no-cors",
+    headers: { 'Access-Control-Allow-Origin': '*' }
+  }
+  await fetch(`http://${ipAddress}/color:${color}`, options)
+    .then(response => response.json()
+      .then(data => {
+        console.log(data);
+        if (response.status == 200) {
+          Swal.fire({
+            title: 'Success', text: 'Successfully changed color', toast: true, position: 'top-right', icon: 'success'
+          });
+        } else {
+          Swal.fire({
+            title: 'Fetch Error', text: response.message, icon: 'error', confirmButtonText: 'Continue'
+          });
+        }
+      }))
+    .catch(error =>
+      Swal.fire({
+        title: 'Fetch Error', text: error.message, icon: 'error', confirmButtonText: 'Continue'
+      }));
+
 }
