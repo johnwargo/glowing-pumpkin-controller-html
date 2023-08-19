@@ -4,11 +4,9 @@ const errorIcon = 'error';
 const successIcon = 'success';
 
 const headers = new Headers();
-// headers.append('Accept', 'application/json');
-headers.append('Accept', '*/*');
+headers.append('Accept', 'application/json');
 headers.append('Access-Control-Allow-Origin', '*');
 headers.append('Access-Control-Allow-Headers', '*');
-// const fetchOptions = { mode: "no-cors", headers };
 const fetchOptions = { mode: "cors", headers };
 
 document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
