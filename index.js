@@ -7,8 +7,8 @@ const headers = new Headers();
 headers.append('Accept', 'application/json');
 headers.append('Access-Control-Allow-Origin', '*');
 headers.append('Access-Control-Allow-Headers', '*');
-// const fetchOptions = { mode: "cors", headers };
-const fetchOptions = { headers };
+const fetchOptions = { mode: "cors", headers };
+// const fetchOptions = { headers };
 
 document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
 
