@@ -26,30 +26,30 @@
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="https://unpkg.com/mvp.css">
   <link rel="stylesheet" href="/index.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.23/dist/sweetalert2.min.css">  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.23/dist/sweetalert2.min.css">
 </head>
 
 <body>
   <main>
     <h1>Pumpkin Controller</h1>
-    <p>Use the buttons below to control the remote device LED Matrix. Set the remote device's IP Address in the Configuration section (below) first.</p>
+    <p>Use the buttons below to control the remote device LED Matrix. Set the remote device's IP Address in the
+      Configuration section (below) first.</p>
 
     <details>
       <summary>Configuration</summary>
       <form id="ipForm">
-        <label for="ipaddr">Remote Device IP Address: </label>
-        <input type="text" id="ipAddress" required
-          pattern="^((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$">
+        <label for="ipaddr">Remote Device Host Address: </label>
+        <input type="text" id="hostAddress" required>
         <input type="submit" value="Submit">
       </form>
     </details>
-    
+
     <span>
       <button type="button" id="btnOff" class="button">All Off</button>
       <button type="button" id="btnRandom" class="button">Random Colors</button>
     </span>
     <br />
-    <span>      
+    <span>
       <button type="button" id="btnLightning" class="button">Lightning</button>
       <select id="lightningCount">
         <option value="1">Once</option>

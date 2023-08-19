@@ -1,5 +1,5 @@
 const continueStr = 'Continue';
-const ipAddressKey = "ipAddress";
+const hostAddressKey = "hostAddress";
 const errorIcon = 'error';
 const successIcon = 'success';
 
@@ -11,14 +11,14 @@ headers.append('Access-Control-Allow-Headers', '*');
 // const fetchOptions = { mode: "no-cors", headers };
 const fetchOptions = { mode: "cors", headers };
 
-document.getElementById(ipAddressKey).value = localStorage.getItem(ipAddressKey);
+document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
 
 let ipForm = document.getElementById("ipForm");
 ipForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  var ipAddress = document.getElementById(ipAddressKey).value.trim();
-  console.log(`Storing IP address: ${ipAddress}`);
-  localStorage.setItem(ipAddressKey, ipAddress);
+  var hostAddress = document.getElementById(hostAddressKey).value.trim();
+  console.log(`Storing IP address: ${hostAddress}`);
+  localStorage.setItem(hostAddressKey, hostAddress);
 });
 
 
@@ -63,7 +63,7 @@ function setColor(e, colorIdx) {
 
 async function execCmd(cmdStr) {
 
-  var ipAddress = localStorage.getItem(ipAddressKey);
+  var ipAddress = localStorage.getItem(hostAddressKey);
   if (ipAddress == null || ipAddress == "") {
     console.error('Missing IP Address');
     Swal.fire({
