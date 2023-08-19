@@ -23,7 +23,7 @@ ipForm.addEventListener("submit", (e) => {
 document.getElementById('btnLightning').addEventListener('click', function (e) {
   // Send the `lightning` command to remote device
   console.log(`Click: ${e.target.id}`);
-  execCmd(`lightning:${document.getElementById('lightningCount').value}`);
+  execCmd('lightning');
 });
 
 document.getElementById('btnFlash').addEventListener('click', function (e) {
