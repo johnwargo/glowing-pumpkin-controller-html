@@ -1,6 +1,6 @@
 const continueStr = 'Continue';
-const hostAddressKey = "hostAddress";
 const errorIcon = 'error';
+const hostAddressKey = "hostAddress";
 const successIcon = 'success';
 
 const headers = new Headers();
@@ -78,16 +78,14 @@ async function execCmd(cmdStr) {
 
   try {
     const response = await fetch(theURL, fetchOptions);
-    // console.dir(response);
     response.json()
       .then(json => {
-        console.dir(json);
         if (response.ok) {
-          console.dir(json);
           Swal.fire({
-            text: 'Successfully changed color',
+            text: 'Successfully executed command',
             toast: true,
-            position: 'top-right',
+            timer: 1500,
+            position: 'top',
             icon: successIcon
           });
         } else {
