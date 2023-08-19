@@ -17,7 +17,8 @@ ipForm.addEventListener("submit", (e) => {
   e.preventDefault();
   var hostAddress = document.getElementById(hostAddressKey).value.trim();
   console.log(`Storing IP address: ${hostAddress}`);
-  localStorage.setItem(hostAddressKey, hostAddress);
+  localStorage.setItem(hostAddressKey, hostAddress)
+  Swal.fire({ title: 'Address Saved', toast: true, timer: 500, position: 'top' });
 });
 
 
