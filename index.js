@@ -7,7 +7,8 @@ const headers = new Headers();
 headers.append('Accept', 'application/json');
 headers.append('Access-Control-Allow-Origin', '*');
 headers.append('Access-Control-Allow-Headers', '*');
-const fetchOptions = { mode: "cors", headers };
+// const fetchOptions = { mode: "cors", headers };
+const fetchOptions = { headers };
 
 document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
 
@@ -80,7 +81,7 @@ async function execCmd(cmdStr) {
     const response = await fetch(theURL, fetchOptions);
     response.json()
       .then(json => {
-        if (response.ok) {
+        if (response.status == 200) {
           Swal.fire({
             text: 'Successfully executed command',
             toast: true,
