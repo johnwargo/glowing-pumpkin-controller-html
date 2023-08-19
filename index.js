@@ -7,7 +7,9 @@ const headers = new Headers();
 // headers.append('Accept', 'application/json');
 headers.append('Accept', '*/*');
 headers.append('Access-Control-Allow-Origin', '*');
-const fetchOptions = { mode: "no-cors", headers };
+headers.append('Access-Control-Allow-Headers', '*');
+// const fetchOptions = { mode: "no-cors", headers };
+const fetchOptions = { mode: "cors", headers };
 
 document.getElementById(ipAddressKey).value = localStorage.getItem(ipAddressKey);
 
@@ -31,7 +33,7 @@ document.getElementById('btnFlash').addEventListener('click', function (e) {
   console.log(`Click: ${e.target.id}`);
   let color = document.getElementById('flashColor').value;
   let count = document.getElementById('flashCount').value;
-  execCmd(`color:${color}:${count}`);
+  execCmd(`flash:${color}:${count}`);
 });
 
 document.getElementById('btnOff').addEventListener('click', function (e) {
@@ -78,30 +80,30 @@ async function execCmd(cmdStr) {
 
   try {
     const response = await fetch(theURL, fetchOptions);
-    console.dir(response);
-    if (response.ok) {
-      response.json().then(json => {
+    // console.dir(response);
+    response.json()
+      .then(json => {
         console.dir(json);
-        Swal.fire({
-          text: 'Successfully changed color',
-          toast: true,
-          position: 'top-right',
-          icon: successIcon
-        });
+        if (response.ok) {
+          console.dir(json);
+          Swal.fire({
+            text: 'Successfully changed color',
+            toast: true,
+            position: 'top-right',
+            icon: successIcon
+          });
+        } else {
+          console.log(`HTTP error: ${response.status}`);
+          Swal.fire({ text: `HTTP error: ${response.status}`, icon: errorIcon, confirmButtonText: continueStr });
+        }
       });
+  } catch (err) {
+    console.dir(err);
+    console.log(err.message);
+    if (err instanceof SyntaxError) {
+      Swal.fire({ text: err, icon: errorIcon, confirmButtonText: continueStr });
     } else {
-      console.log(`HTTP error: ${response.status}`);
-      Swal.fire({ text: `HTTP error: ${response.status}`, icon: errorIcon, confirmButtonText: continueStr }); 
+      Swal.fire({ text: err.message, icon: errorIcon, confirmButtonText: continueStr });
     }
-  } catch (error) {
-    if (error instanceof SyntaxError) {
-      console.log(error);
-      Swal.fire({ text: error, icon: errorIcon, confirmButtonText: continueStr });
-    } else {
-      console.log('There was an error', error);
-      Swal.fire({ text: error.message, icon: errorIcon, confirmButtonText: continueStr });
-    }
-    return;
   }
-
 }
