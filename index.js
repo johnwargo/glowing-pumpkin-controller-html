@@ -3,12 +3,12 @@ const errorIcon = 'error';
 const hostAddressKey = "hostAddress";
 const successIcon = 'success';
 
-const headers = new Headers();
-headers.append('Accept', 'application/json');
-headers.append('Access-Control-Allow-Origin', '*');
-headers.append('Access-Control-Allow-Headers', '*');
-const fetchOptions = { mode: "cors", headers };
-// const fetchOptions = { headers };
+// const headers = new Headers();
+// headers.append('Accept', 'application/json');
+// headers.append('Access-Control-Allow-Origin', '*');
+// headers.append('Access-Control-Allow-Headers', '*');
+const fetchOptions = { mode: "cors", headers: { accept: "*/*" } };
+
 
 document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
 
