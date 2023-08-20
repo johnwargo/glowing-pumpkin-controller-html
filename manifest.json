@@ -1,5 +1,6 @@
 {
- "name": "App",
+ "name": "Pumpkin Controller",
+ "short_name": "Pumpkin",
  "display": "standalone",
  "id": "/",
  "start_url": "/",
