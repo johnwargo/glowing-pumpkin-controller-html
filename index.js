@@ -9,7 +9,6 @@ const successIcon = 'success';
 // headers.append('Access-Control-Allow-Headers', '*');
 const fetchOptions = { mode: "cors", headers: { accept: "*/*" } };
 
-
 document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
 
 let ipForm = document.getElementById("ipForm");
@@ -62,8 +61,8 @@ function setColor(e, colorIdx) {
 }
 
 async function execCmd(cmdStr) {
-
   var ipAddress = localStorage.getItem(hostAddressKey);
+  
   if (ipAddress == null || ipAddress == "") {
     console.error('Missing IP Address');
     Swal.fire({
