@@ -3,11 +3,10 @@ const errorIcon = 'error';
 const hostAddressKey = "hostAddress";
 const successIcon = 'success';
 
-// const headers = new Headers();
-// headers.append('Accept', 'application/json');
-// headers.append('Access-Control-Allow-Origin', '*');
-// headers.append('Access-Control-Allow-Headers', '*');
-const fetchOptions = { mode: "cors", headers: { accept: "*/*" } };
+// Changed the request type to `post` to avoid Chrome
+// sending the request to the server twice
+// https://github.com/esp8266/Arduino/issues/6181
+const fetchOptions = { method: 'post', mode: "cors", headers: { accept: "*/*" } };
 
 document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
 
