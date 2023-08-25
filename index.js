@@ -8,6 +8,22 @@ const successIcon = 'success';
 // https://github.com/esp8266/Arduino/issues/6181
 const fetchOptions = { method: 'post', mode: "cors", headers: { accept: "*/*" } };
 
+
+/**
+ * Code execution starts here
+ */
+
+const urlParams = new URLSearchParams(window.location.search);
+// Do we have an Ip address in the query string?
+if (urlParams.toString().length > 0) {
+  const ipAddress = urlParams.toString().slice(0, -1);
+  console.log(`IP Address: ${ipAddress}`);
+  // save it to local storage
+  localStorage.setItem(hostAddressKey, ipAddress);
+  // then redirect to the same page without the query string
+  window.location = window.location.href.split('?')[0];
+}
+
 document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
 
 let ipForm = document.getElementById("ipForm");
@@ -15,7 +31,7 @@ ipForm.addEventListener("submit", (e) => {
   e.preventDefault();
   var hostAddress = document.getElementById(hostAddressKey).value.trim();
   console.log(`Storing IP address: ${hostAddress}`);
-  localStorage.setItem(hostAddressKey, hostAddress)
+  localStorage.setItem(hostAddressKey, hostAddress);
   Swal.fire({ title: 'Address Saved', toast: true, timer: 500, position: 'top' });
 });
 
@@ -61,7 +77,7 @@ function setColor(e, colorIdx) {
 
 async function execCmd(cmdStr) {
   var ipAddress = localStorage.getItem(hostAddressKey);
-  
+
   if (ipAddress == null || ipAddress == "") {
     console.error('Missing IP Address');
     Swal.fire({
