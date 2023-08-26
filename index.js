@@ -6,7 +6,8 @@ const successIcon = 'success';
 // Changed the request type to `post` to avoid Chrome
 // sending the request to the server twice
 // https://github.com/esp8266/Arduino/issues/6181
-const fetchOptions = { method: 'POST', mode: "cors", headers: { accept: "*/*" } };
+// const fetchOptions = { method: 'POST', mode: "cors", headers: { accept: "*/*" } };
+const fetchOptions = { mode: "cors", headers: { accept: "*/*" } };
 
 // ========================================
 // Code execution starts here
