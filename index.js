@@ -7,6 +7,7 @@ const successIcon = 'success';
 // sending the request to the server twice
 // https://github.com/esp8266/Arduino/issues/6181
 // const fetchOptions = { method: 'POST', mode: "cors", headers: { accept: "*/*" } };
+// wrong, put it back and fixed it another way
 const fetchOptions = { mode: "cors", headers: { accept: "*/*" } };
 
 // ========================================
