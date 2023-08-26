@@ -8,14 +8,14 @@ const successIcon = 'success';
 // https://github.com/esp8266/Arduino/issues/6181
 const fetchOptions = { method: 'post', mode: "cors", headers: { accept: "*/*" } };
 
-
-/**
- * Code execution starts here
- */
-
+// ========================================
+// Code execution starts here
+// ========================================
+// Get the query string
 const urlParams = new URLSearchParams(window.location.search);
 // Do we have an Ip address in the query string?
 if (urlParams.toString().length > 0) {
+  // always seems to have an extra character at the end, so whack it
   const ipAddress = urlParams.toString().slice(0, -1);
   console.log(`IP Address: ${ipAddress}`);
   // save it to local storage
@@ -24,8 +24,9 @@ if (urlParams.toString().length > 0) {
   window.location = window.location.href.split('?')[0];
 }
 
+// populate the Host Address field if we have it in storage
 document.getElementById(hostAddressKey).value = localStorage.getItem(hostAddressKey);
-
+// Now get a handle on the form and add a listener for the submit event
 let ipForm = document.getElementById("ipForm");
 ipForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -35,7 +36,9 @@ ipForm.addEventListener("submit", (e) => {
   Swal.fire({ title: 'Address Saved', toast: true, timer: 500, position: 'top' });
 });
 
-
+// ========================================
+// Button event listeners
+// ========================================
 document.getElementById('btnLightning').addEventListener('click', function (e) {
   // Send the `lightning` command to remote device
   console.log(`Click: ${e.target.id}`);
