@@ -50,7 +50,7 @@ document.getElementById('btnFlash').addEventListener('click', function (e) {
   // Send the `flash` command to remote device
   console.log(`Click: ${e.target.id}`);
   let color = document.getElementById('flashColor').value;
-  let count = document.getElementById('flashCount').value;
+  let count = document.getElementById('flashCount').value + 1;
   execCmd(`flash:${color}:${count}`);
 });
 
