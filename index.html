@@ -27,12 +27,22 @@
   <link rel="stylesheet" href="https://unpkg.com/mvp.css">
   <link rel="stylesheet" href="/index.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.23/dist/sweetalert2.min.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL8L0E7EY3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-HL8L0E7EY3');
+  </script>
 </head>
 
 <body>
   <main>
     <h1>Pumpkin Controller</h1>
-    <p>Use the buttons below to control the remote device LED Matrix. Configure the IP Address of the remote device (if needed) at the bottom of the page.</p>
+    <p>Use the buttons below to control the remote device LED Matrix. Configure the IP Address of the remote device (if
+      needed) at the bottom of the page.</p>
 
     <span>
       <button type="button" id="btnOff" class="button">All Off</button>
